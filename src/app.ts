@@ -9,11 +9,15 @@
 // npm i -D nodemon
 // npm i -D tsconfig-paths
 
+// npm i mongoose
+
 import express, { Express } from "express";
 import { ChattyServer } from "./setupServer";
+import setupDatabase from "./setupDatabase";
 
 class Application {
   public async initialize(): Promise<void> {
+    setupDatabase();
     const app: Express = express();
     const server: ChattyServer = new ChattyServer(app);
     await server.start();
