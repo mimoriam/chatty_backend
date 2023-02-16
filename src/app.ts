@@ -10,17 +10,24 @@
 // npm i -D tsconfig-paths
 
 // npm i mongoose
+// npm i dotenv
 
 import express, { Express } from "express";
 import { ChattyServer } from "./setupServer";
 import setupDatabase from "./setupDatabase";
+import { config } from "./config";
 
 class Application {
   public async initialize(): Promise<void> {
+    this.loadConfig();
     setupDatabase();
     const app: Express = express();
     const server: ChattyServer = new ChattyServer(app);
     await server.start();
+  }
+
+  private loadConfig(): void {
+    config.validateConfig();
   }
 }
 

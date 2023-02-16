@@ -1,12 +1,11 @@
 import * as mongoose from "mongoose";
+import { config } from "./config";
 
 export default () => {
   const connect = () => {
-    mongoose.set('strictQuery', false);
+    mongoose.set("strictQuery", false);
     mongoose
-      .connect(
-        "mongodb+srv://Mimo:test12345@cluster0.imas8vz.mongodb.net/?retryWrites=true&w=majority"
-      )
+      .connect(`${config.DATABASE_URL}`)
       .then(() => {
         console.log("Successfully connected to database.");
       })

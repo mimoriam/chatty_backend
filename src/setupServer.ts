@@ -5,6 +5,7 @@ import hpp from "hpp";
 import helmet from "helmet";
 import cors from "cors";
 import compression from "compression";
+import {config} from "./config";
 
 const SERVER_PORT: number = 5000;
 
@@ -27,9 +28,9 @@ export class ChattyServer {
     app.use(
       cookieSession({
         name: "session",
-        keys: ["test1", "test2"],
+        keys: [config.SECRET_KEY_ONE!, config.SECRET_KEY_TWO!],
         maxAge: 24 * 7 * 3600000,
-        secure: false,
+        secure: config.NODE_ENV !== 'development'
       })
     );
 
@@ -37,7 +38,8 @@ export class ChattyServer {
     app.use(helmet());
     app.use(
       cors({
-        origin: "*",
+        // origin: "*",
+        origin: config.CLIENT_URL,
         credentials: true,
         methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
       })
