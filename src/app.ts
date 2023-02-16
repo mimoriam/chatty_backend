@@ -12,6 +12,8 @@
 // npm i mongoose
 // npm i dotenv
 
+// npm i @socket.io/redis-adapter redis socket.io
+
 import express, { Express } from "express";
 import { ChattyServer } from "./setupServer";
 import setupDatabase from "./setupDatabase";
